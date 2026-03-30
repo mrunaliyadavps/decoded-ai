@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import { useState } from "react";
 
 const loadingLines = [
@@ -56,7 +57,9 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState(loadingLines[0]);
   const [result, setResult] = useState(null);
-  const [reportId] = useState(genReportId());
+  const [reportId, setReportId] = useState("");
+  const [reportDate, setReportDate] = useState("");
+  useEffect(() => { setReportId(genReportId()); setReportDate(todayDate()); }, []);
   const [btnText, setBtnText] = useState("Decode My Rejection");
 
   const stages = [
@@ -183,7 +186,7 @@ export default function Home() {
           </div>
           <div className="report-topbar-right">
             <div>ID: <span>{reportId}</span></div>
-            <div>Date: <span>{todayDate()}</span></div>
+            <div>Date: <span>{reportDate}</span></div>
           </div>
         </div>
 
